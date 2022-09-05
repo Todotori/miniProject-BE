@@ -17,17 +17,20 @@ public interface ToDoService {
 
   ToDoResponseDto updateDone(Long id, ToDoUpdateDoneRequestDto toDoUpdateDoneRequestDto);
 
+  //전체 조회  (로그인 안한 사람)
+  List<ToDoResponseDto> getALlList();
+
   // select - 1개 조회
   ToDoResponseDto get(Long id);
 
-  // select List - 전체 조회
-  List<ToDoResponseDto> getList();
+  // select List - 전체 조회 (로그인 사용자)
+  List<ToDoResponseDto> getList(Long id);
 
-  //ToDoDone만 조회 (완료된 것만 조회)
-  List<ToDoResponseDto> getDoneList();
+  //ToDoDone만 조회 (완료만 조회) (로그인 사용자)
+  List<ToDoResponseDto> getDoneList(Long id);
 
-  //ToDoDone 안된 것 조회 (미완료된 것만 조회)
-  List<ToDoResponseDto> getUndoneList();
+  //ToDoDone 안된 것 조회 (미완료만 조회) (로그인 사용자)
+  List<ToDoResponseDto> getUndoneList(Long id);
 
   // delete
   void delete(Long id);

@@ -1,4 +1,4 @@
-package com.sparta.miniprojectbe.config;
+package com.sparta.miniprojectbe.security;
 
 import com.sparta.miniprojectbe.jwt.AccessDeniedHandlerException;
 import com.sparta.miniprojectbe.jwt.AuthenticationEntryPointException;
@@ -19,6 +19,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +36,8 @@ public class SecurityConfiguration {
   private final AuthenticationEntryPointException authenticationEntryPointException;
   private final AccessDeniedHandlerException accessDeniedHandlerException;
 
+  private final CorsConfigurationSource corsConfigurationSource;
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
@@ -48,32 +52,32 @@ public class SecurityConfiguration {
   @Bean
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors();
-
+    http.cors().configurationSource(corsConfigurationSource);
+// CSRF 설정 Disable
     http.csrf().disable()
 
         .exceptionHandling()
         .authenticationEntryPoint(authenticationEntryPointException)
-        .accessDeniedHandler(accessDeniedHandlerException)
+        .accessDeniedHandler(accessDeniedHandlerException);
 
-        .and()
+    http
         .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-        .and()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http
         .authorizeRequests()
 
-        .antMatchers("/api/emailck/**").permitAll()
-        .antMatchers("/api/nickck/**").permitAll()
+        .antMatchers("/api/emailcheck/**").permitAll()
+        .antMatchers("/api/nickcheck/**").permitAll()
         .antMatchers("/api/signup/**").permitAll()
         .antMatchers("/api/login/**").permitAll()
-        .anyRequest().authenticated()
-
-        .and()
+        .antMatchers("/**").permitAll(); //Todo:전체허용
+//        .anyRequest().authenticated()
+    http
         .apply(new JwtSecurityConfiguration(SECRET_KEY, tokenProvider, userDetailsService));
 
     return http.build();
   }
+
 
 
 }

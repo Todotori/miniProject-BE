@@ -3,6 +3,7 @@ package com.sparta.miniprojectbe.domain.entity;
 import com.sparta.miniprojectbe.domain.dto.request.ToDoRequestDto.ToDoCreateRequestDto;
 import com.sparta.miniprojectbe.domain.dto.request.ToDoRequestDto.ToDoUpdateDoneRequestDto;
 import com.sparta.miniprojectbe.domain.dto.request.ToDoRequestDto.ToDoUpdateRequestDto;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,10 @@ public class ToDo extends Timestamped {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Member member;
+
+  private LocalDateTime createdAt;
+
+  private LocalDateTime modifiedAt;
 
   public ToDo(ToDoCreateRequestDto toDoCreateRequestDto, Member member) {
     this.title = toDoCreateRequestDto.getTitle();

@@ -1,7 +1,8 @@
 package com.sparta.miniprojectbe.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.miniprojectbe.domain.entity.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.enums.ErrorCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -61,9 +62,7 @@ public class JwtFilter extends OncePerRequestFilter {
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().println(
             new ObjectMapper().writeValueAsString(
-                ResponseDto.fail("BAD_REQUEST", "Token이 유효햐지 않습니다.")
-            )
-        );
+                new ResponseDto<>(null, ErrorCode.BAD_TOKEN_REQUEST)));
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       }
 

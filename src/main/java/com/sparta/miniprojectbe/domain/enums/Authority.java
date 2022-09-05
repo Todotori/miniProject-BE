@@ -1,4 +1,4 @@
-package com.sparta.miniprojectbe.jwt;
+package com.sparta.miniprojectbe.domain.enums;
 
 public enum Authority {
   ROLE_MEMBER,

@@ -12,6 +12,8 @@ public interface ToDoRepository extends JpaRepository<ToDo, Long> {
 
   List<ToDo> findByMember(Member member);
 
+  List<ToDo> findAllByOrderByModifiedAtDesc();
+
   // contains는 해당 필드의 값에 검색하려는 값이 포함이 되어있으면 반환해준다.
   List<ToDo> findByMemberAndTagContains(Member member, String tag);
 

@@ -42,6 +42,12 @@ public class Member extends Timestamped{
   @Column
   private String profileImage;
 
+  public Member (String email, String nickname, String password){
+    this.email = email;
+    this.nickname = nickname;
+    this.password = password;
+  }
+
   public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
     return passwordEncoder.matches(password, this.password);
   }

@@ -6,11 +6,13 @@ import com.sparta.miniprojectbe.domain.dto.request.ToDoRequestDto.ToDoUpdateRequ
 import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
 import com.sparta.miniprojectbe.domain.dto.response.ToDoResponseDto;
 import com.sparta.miniprojectbe.domain.enums.ErrorCode;
+import com.sparta.miniprojectbe.security.UserDetailsImpl;
 import com.sparta.miniprojectbe.service.ToDoService;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +27,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class ToDoController {
   private final ToDoService toDoService;
 
+  //전체조회 (미로그인)
+  @GetMapping("/api/todo/all")
+  public ResponseDto<List<ToDoResponseDto>> getAll(){
+    List<ToDoResponseDto> toDoResponseDtoList;
+
+    try {
+      toDoResponseDtoList = toDoService.getALlList();
+    }catch (EntityNotFoundException e){
+      log.error(e.getMessage());
+      return new ResponseDto<>(null, ErrorCode.ENTITY_NOT_FOUND);
+    }catch (Exception e){
+      log.error(e.getMessage());
+      return new ResponseDto<>(null,ErrorCode.INVALID_ERROR);
+    }
+
+    return new ResponseDto<>(toDoResponseDtoList);
+  }
+
+
+
   // 1개 조회
-  @GetMapping("/api/todo/{id}")
+  @GetMapping("/api/todo/{id}")//todo_id
   public ResponseDto<ToDoResponseDto> get(@PathVariable Long id){
     ToDoResponseDto toDoResponseDto;
     try {
@@ -42,12 +64,15 @@ public class ToDoController {
     return new ResponseDto<>(toDoResponseDto);
   }
 
-  // 전체 조회
+  // 전체 조회 (로그인)
   @GetMapping("/api/todo")
-  public ResponseDto<List<ToDoResponseDto>> getList(){
+  public ResponseDto<List<ToDoResponseDto>> getList(@AuthenticationPrincipal UserDetailsImpl userDetails){
     List<ToDoResponseDto> toDoResponseDtoList;
+    // 로그인 되어 있는 회원 테이블의 ID
+    Long memberId = userDetails.getMember().getId();
+
     try {
-      toDoResponseDtoList = toDoService.getList();
+      toDoResponseDtoList = toDoService.getList(memberId);
     }catch (EntityNotFoundException e){
       log.error(e.getMessage());
       return new ResponseDto<>(null,ErrorCode.ENTITY_NOT_FOUND);
@@ -58,12 +83,14 @@ public class ToDoController {
     return new ResponseDto<>(toDoResponseDtoList);
   }
 
-  //완료 조회
+  //완료 조회(로그인)
   @GetMapping("/api/todo/done")
-  public ResponseDto<List<ToDoResponseDto>> getDoneList(){
+  public ResponseDto<List<ToDoResponseDto>> getDoneList(@AuthenticationPrincipal UserDetailsImpl userDetails){
     List<ToDoResponseDto> toDoResponseDtoList;
+    // 로그인 되어 있는 회원 테이블의 ID
+    Long memberId = userDetails.getMember().getId();
     try {
-      toDoResponseDtoList = toDoService.getDoneList();
+      toDoResponseDtoList = toDoService.getDoneList(memberId);
     }catch (EntityNotFoundException e){
       log.error(e.getMessage());
       return new ResponseDto<>(null,ErrorCode.ENTITY_NOT_FOUND);
@@ -74,12 +101,14 @@ public class ToDoController {
     return new ResponseDto<>(toDoResponseDtoList);
   }
 
-  //미완료 조회
+  //미완료 조회(로그인)
   @GetMapping("/api/todo/undone")
-  public ResponseDto<List<ToDoResponseDto>> getUnDoneList(){
+  public ResponseDto<List<ToDoResponseDto>> getUnDoneList(@AuthenticationPrincipal UserDetailsImpl userDetails){
     List<ToDoResponseDto> toDoResponseDtoList;
+    // 로그인 되어 있는 회원 테이블의 ID
+    Long memberId = userDetails.getMember().getId();
     try {
-      toDoResponseDtoList = toDoService.getUndoneList();
+      toDoResponseDtoList = toDoService.getUndoneList(memberId);
     }catch (EntityNotFoundException e){
       log.error(e.getMessage());
       return new ResponseDto<>(null,ErrorCode.ENTITY_NOT_FOUND);

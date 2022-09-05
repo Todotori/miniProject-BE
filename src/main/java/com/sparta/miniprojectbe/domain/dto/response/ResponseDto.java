@@ -1,9 +1,11 @@
 package com.sparta.miniprojectbe.domain.dto.response;
 
 import com.sparta.miniprojectbe.domain.enums.ErrorCode;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class ResponseDto<T> {
 
   boolean success;

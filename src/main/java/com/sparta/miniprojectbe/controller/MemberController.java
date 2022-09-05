@@ -1,9 +1,9 @@
 package com.sparta.miniprojectbe.controller;
 
-import com.sparta.miniprojectbe.domain.entity.request.CheckRequestDto;
-import com.sparta.miniprojectbe.domain.entity.request.LoginRequestDto;
-import com.sparta.miniprojectbe.domain.entity.request.MemberRequestDto;
-import com.sparta.miniprojectbe.domain.entity.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.dto.request.CheckRequestDto;
+import com.sparta.miniprojectbe.domain.dto.request.LoginRequestDto;
+import com.sparta.miniprojectbe.domain.dto.request.MemberRequestDto;
+import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
 import com.sparta.miniprojectbe.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +29,15 @@ public class MemberController {
     }
 
     // 이메일 중복확인
-    @PostMapping("/api/emailck")
-    public boolean emailck(@RequestBody CheckRequestDto requestDto) {
-        return memberService.emailck(requestDto);
+    @PostMapping("/api/emailcheck")
+    public boolean emailcheck(@RequestBody CheckRequestDto requestDto) {
+        return memberService.emailCheck(requestDto);
     }
 
     // 닉네임 중복확인
-    @PostMapping("/api/nickck")
-    public boolean nickck(@RequestBody CheckRequestDto requestDto) {
-        return memberService.nickck(requestDto);
+    @PostMapping("/api/nickcheck")
+    public boolean nickcheck(@RequestBody CheckRequestDto requestDto) {
+        return memberService.nickCheck(requestDto);
     }
 
 }

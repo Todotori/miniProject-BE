@@ -10,14 +10,27 @@ public class MemberResponseDto {
   private Long id;
   private String nickname;
   private String email;
-  private LocalDateTime createdAt;
-  private LocalDateTime modifiedAt;
 
-  public MemberResponseDto(Member member) {
+//  private LocalDateTime createdAt;
+//  private LocalDateTime modifiedAt;
+
+//  public MemberResponseDto(Member member) {
+//    this.id = member.getId();
+//    this.nickname = member.getNickname();
+//    this.email = member.getEmail();
+//    this.createdAt = member.getCreatedAt();
+//    this.modifiedAt = member.getModifiedAt();
+//  }
+
+  public MemberResponseDto(Member member){
     this.id = member.getId();
-    this.nickname = member.getNickname();
     this.email = member.getEmail();
-    this.createdAt = member.getCreatedAt();
-    this.modifiedAt = member.getModifiedAt();
+    this.nickname = member.getNickname();
   }
+  public MemberResponseDto(Long id,String email,String nickname ){
+    this.id = id;
+    this.email = email;
+    this.nickname = nickname;
+  }
+
 }
