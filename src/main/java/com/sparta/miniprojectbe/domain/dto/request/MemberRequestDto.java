@@ -1,16 +1,17 @@
-package com.sparta.miniprojectbe.domain.entity.request;
+package com.sparta.miniprojectbe.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckRequestDto {
+public class MemberRequestDto {
 
     private String email;
     private String nickname;
+    private String password;
+    private String passwordConfirm;
 
 }

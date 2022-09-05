@@ -1,7 +1,8 @@
 package com.sparta.miniprojectbe.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.miniprojectbe.domain.entity.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.enums.ErrorCode;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -19,9 +20,7 @@ public class AccessDeniedHandlerException implements AccessDeniedHandler {
     response.setContentType("application/json;charset=UTF-8");
     response.getWriter().println(
         new ObjectMapper().writeValueAsString(
-            ResponseDto.fail("BAD_REQUEST", "로그인이 필요합니다.")
-        )
-    );
+            new ResponseDto<>(null, ErrorCode.NEED_LOGIN)));
     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
   }
 }

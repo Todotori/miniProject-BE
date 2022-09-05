@@ -1,4 +1,4 @@
-package com.sparta.miniprojectbe.config;
+package com.sparta.miniprojectbe.security;
 
 import com.sparta.miniprojectbe.jwt.JwtFilter;
 import com.sparta.miniprojectbe.jwt.TokenProvider;

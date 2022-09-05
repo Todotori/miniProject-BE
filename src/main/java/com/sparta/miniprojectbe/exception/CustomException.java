@@ -1,0 +1,17 @@
+package com.sparta.miniprojectbe.exception;
+
+import com.sparta.miniprojectbe.domain.enums.ErrorCode;
+import lombok.Getter;
+
+@Getter
+public class CustomException extends RuntimeException {
+
+  private final ErrorCode errorCode;
+
+  public CustomException(ErrorCode errorCode) {
+    super(errorCode.getMessage());
+    this.errorCode = errorCode;
+  }
+
+}
+

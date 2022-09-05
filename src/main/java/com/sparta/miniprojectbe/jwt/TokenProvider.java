@@ -1,10 +1,13 @@
 package com.sparta.miniprojectbe.jwt;
 
+import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
 import com.sparta.miniprojectbe.domain.entity.Member;
 import com.sparta.miniprojectbe.domain.entity.RefreshToken;
-import com.sparta.miniprojectbe.domain.entity.response.ResponseDto;
 import com.sparta.miniprojectbe.domain.entity.TokenDto;
+import com.sparta.miniprojectbe.domain.enums.Authority;
+import com.sparta.miniprojectbe.domain.enums.ErrorCode;
 import com.sparta.miniprojectbe.repository.RefreshTokenRepository;
+import com.sparta.miniprojectbe.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -108,10 +111,10 @@ public class TokenProvider {
   public ResponseDto<?> deleteRefreshToken(Member member) {
     RefreshToken refreshToken = isPresentRefreshToken(member);
     if (null == refreshToken) {
-      return ResponseDto.fail("TOKEN_NOT_FOUND", "존재하지 않는 Token 입니다.");
+      return new ResponseDto<>(ErrorCode.TOKEN_NOT_FOUND);
     }
 
     refreshTokenRepository.delete(refreshToken);
-    return ResponseDto.success("success");
+    return new ResponseDto<>("success");
   }
 }

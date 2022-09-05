@@ -18,20 +18,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Member {
+public class Member extends Timestamped{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
-  private String email;
+  @Column(unique = true, nullable = false)
+  private String nickname;
 
   @Column(nullable = false)
   private String password;
 
-  @Column(nullable = false)
-  private String nickname;
+  @Column(unique = true, nullable = false)
+  private String email;
 
   @Column
   private String company;
@@ -41,6 +41,12 @@ public class Member {
 
   @Column
   private String profileImage;
+
+  public Member (String email, String nickname, String password){
+    this.email = email;
+    this.nickname = nickname;
+    this.password = password;
+  }
 
   public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
     return passwordEncoder.matches(password, this.password);

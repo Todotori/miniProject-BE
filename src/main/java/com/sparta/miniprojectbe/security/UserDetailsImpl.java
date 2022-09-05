@@ -1,6 +1,7 @@
-package com.sparta.miniprojectbe.jwt;
+package com.sparta.miniprojectbe.security;
 
 import com.sparta.miniprojectbe.domain.entity.Member;
+import com.sparta.miniprojectbe.domain.enums.Authority;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
