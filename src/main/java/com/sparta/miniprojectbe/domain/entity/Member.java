@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Member {
+public class Member extends Timestamped{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(unique = true, nullable = false)
-  private String email;
+  private String nickname;
 
   @Column(nullable = false)
   private String password;
 
   @Column(unique = true, nullable = false)
-  private String nickname;
+  private String email;
 
 }
