@@ -1,22 +1,22 @@
-POST http://localhost:8080/api/emailck
+POST http://3.34.90.63/api/emailcheck
 Content-Type: application/json
 
 {
-  "email" : "asd"
+  "email" : "421q312"
 }
 
 ###
 
-POST http://localhost:8080/api/nickck
+POST http://3.34.90.63/api/nickcheck
 Content-Type: application/json
 
 {
-  "nickname" : "jaewo"
+  "nickname" : "qwe123"
 }
 
 ###
 
-POST http://localhost:8080/api/signup
+POST http://3.34.90.63/api/signup
 Content-Type: application/json
 
 {
@@ -28,10 +28,20 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/api/login
+POST http://3.34.90.63/api/login
 Content-Type: application/json
 
 {
   "email":"qwe123",
   "password":"1234"
 }
+
+###
+
+GET http://3.34.90.63/api/todo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjMiLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE2NjI0MzIzODF9.DHa8Tx-Tqhr87mQ0nCPBTdl-eKOGZ6Jf-1yEOom_rcQ
+#Refresh-Token: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjMwMzM1ODF9.ctIJ4Xl0mxlkGUrCXPLNUQ-DvFHEgbpzSftl_7TPS5E
+
+Accept: application/json
+
+###
