@@ -1,5 +1,7 @@
 package com.sparta.miniprojectbe.security;
 
+import static org.springframework.http.HttpMethod.GET;
+
 import com.sparta.miniprojectbe.jwt.AccessDeniedHandlerException;
 import com.sparta.miniprojectbe.jwt.AuthenticationEntryPointException;
 import com.sparta.miniprojectbe.jwt.TokenProvider;
@@ -36,7 +38,9 @@ public class SecurityConfiguration {
   private final AuthenticationEntryPointException authenticationEntryPointException;
   private final AccessDeniedHandlerException accessDeniedHandlerException;
 
-  private final CorsConfigurationSource corsConfigurationSource;
+//  private final CorsConfigurationSource corsConfigurationSource;
+
+  private final CorsConfiguration corsConfiguration;
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -52,7 +56,9 @@ public class SecurityConfiguration {
   @Bean
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors().configurationSource(corsConfigurationSource);
+//    http.cors().configure(corsConfigurationSource);
+    http.addFilter(corsConfiguration.corsFilter()); // filter로 cors 설정을 등록한다.
+
 // CSRF 설정 Disable
     http.csrf().disable()
 
@@ -70,7 +76,10 @@ public class SecurityConfiguration {
         .antMatchers("/api/nickcheck/**").permitAll()
         .antMatchers("/api/signup/**").permitAll()
         .antMatchers("/api/login/**").permitAll()
-        .antMatchers("/**").permitAll(); //Todo:전체허용
+        .antMatchers("/api/todo/all").permitAll()
+        .antMatchers(GET,"/api/todo/all").permitAll()
+        .anyRequest().hasRole("MEMBER");
+//       .antMatchers("/**").permitAll(); 전체허용
 //        .anyRequest().authenticated()
     http
         .apply(new JwtSecurityConfiguration(SECRET_KEY, tokenProvider, userDetailsService));
