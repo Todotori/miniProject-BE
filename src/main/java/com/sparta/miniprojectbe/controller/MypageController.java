@@ -18,6 +18,9 @@ public class MypageController {
 
     private final MypageService mypageService;
 
+    @GetMapping("/api/member")
+
+
     @PutMapping("/api/member")
     public ResponseDto<MemberUpdateResponseDto> updateMypage(@RequestPart("data") MemberUpdateRequestDto requestDto,
                                                              @AuthenticationPrincipal UserDetailsImpl userDetails,

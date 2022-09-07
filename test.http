@@ -33,10 +33,10 @@ POST http://localhost:8080/api/signup
 Content-Type: application/json
 
 {
-  "email" : "qwe123445",
-  "nickname" : "qwe123445",
-  "password" : "123455",
-  "passwordConfirm":"123455"
+  "email" : "asdf3@naver.com",
+  "nickname" : "wer재원2",
+  "password" : "23444",
+  "passwordConfirm":"23444"
 }
 
 ###
