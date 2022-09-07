@@ -13,8 +13,6 @@ public class MemberResponseDto {
   private LocalDateTime createdAt;
   private LocalDateTime modifiedAt;
 
-//  private LocalDateTime createdAt;
-//  private LocalDateTime modifiedAt;
 
 //  public MemberResponseDto(Member member) {
 //    this.id = member.getId();

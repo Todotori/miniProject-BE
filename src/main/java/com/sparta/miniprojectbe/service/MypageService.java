@@ -5,7 +5,9 @@ import com.sparta.miniprojectbe.Util.S3Uploader;
 import com.sparta.miniprojectbe.domain.dto.request.MemberUpdateRequestDto;
 import com.sparta.miniprojectbe.domain.dto.response.MemberUpdateResponseDto;
 import com.sparta.miniprojectbe.domain.entity.Member;
+import com.sparta.miniprojectbe.jwt.TokenProvider;
 import com.sparta.miniprojectbe.repository.MemberRepository;
+import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +18,19 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Service
 public class MypageService {
+
     private final MemberRepository memberRepository;
     private final S3Uploader s3Uploader;
+    private final TokenProvider tokenProvider;
 
     @Transactional
-    public MemberUpdateResponseDto updateMyPage(String userId, MemberUpdateRequestDto memberUpdateRequestDto, MultipartFile image){
-        Member member = memberRepository.findByEmail(userId).orElseThrow();
-        System.out.println("userid"+userId);
-        System.out.println(memberUpdateRequestDto.getComment()+"sdf");
-        System.out.println("member"+member);
+    public MemberUpdateResponseDto updateMyPage(String userId,
+        MemberUpdateRequestDto memberUpdateRequestDto, MultipartFile image) {
+        Member member = memberRepository.findByEmail(userId)
+            .orElseThrow(EntityNotFoundException::new);
+        System.out.println("userid" + userId);
+        System.out.println(memberUpdateRequestDto.getComment() + "sdf");
+        System.out.println("member" + member);
         System.out.println(image);
         String storedFileName = member.getProfileImage();
         if (image != null) {
@@ -36,12 +42,8 @@ public class MypageService {
             }
         }
 
-        member.update(memberUpdateRequestDto,storedFileName);
-//        memberRepository.save(member);
-
+        member.update(memberUpdateRequestDto, storedFileName);
+        //       memberRepository.save(member);
         return new MemberUpdateResponseDto(member);
     }
-
-
-
 }
