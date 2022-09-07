@@ -38,7 +38,7 @@ public class SecurityConfiguration {
   private final AuthenticationEntryPointException authenticationEntryPointException;
   private final AccessDeniedHandlerException accessDeniedHandlerException;
 
-//  private final CorsConfigurationSource corsConfigurationSource;
+  //private final CorsConfigurationSource corsConfigurationSource;
 
   private final CorsConfiguration corsConfiguration;
 
@@ -56,7 +56,7 @@ public class SecurityConfiguration {
   @Bean
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//    http.cors().configure(corsConfigurationSource);
+//    http.cors().configurationSource(corsConfigurationSource);
     http.addFilter(corsConfiguration.corsFilter()); // filter로 cors 설정을 등록한다.
 
 // CSRF 설정 Disable
@@ -86,7 +86,5 @@ public class SecurityConfiguration {
 
     return http.build();
   }
-
-
 
 }

@@ -38,6 +38,7 @@ public class CorsConfiguration {
     config.setAllowCredentials(true);
     config.addAllowedOriginPattern("*");
     config.addAllowedHeader("*");
+    config.addExposedHeader("Authorization"); //헤더에 토큰값 추가
     config.addAllowedMethod("*");
 
     // package가 추가 되거나 변경 되면 변경
