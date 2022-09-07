@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,7 +25,7 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/api/signup")
-    public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto, HttpServletResponse response) {
+    public ResponseDto<?> signup(@Valid @RequestBody MemberRequestDto requestDto, HttpServletResponse response) {
         return memberService.createMember(requestDto, response);
     }
 
