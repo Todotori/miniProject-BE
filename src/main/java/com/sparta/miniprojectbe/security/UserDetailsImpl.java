@@ -18,6 +18,12 @@ import java.util.Collection;
 public class UserDetailsImpl implements UserDetails {
 
   private Member member;
+  private Long memberId;
+
+  public UserDetailsImpl(Member member) {
+    this.member = member;
+  }
+
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

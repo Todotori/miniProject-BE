@@ -25,7 +25,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
 
     // 회원가입
-    public ResponseDto<?> createMember(MemberRequestDto requestDto) {
+    public ResponseDto<?> createMember(MemberRequestDto requestDto, HttpServletResponse response) {
 
         if (null != isPresentEmail(requestDto.getEmail())) {
             return new ResponseDto<>(null, ErrorCode.DUPLICATED_EMAIL);
@@ -38,12 +38,15 @@ public class MemberService {
         if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
             return new ResponseDto<>(null,ErrorCode.PASSWORDS_NOT_MATCHED);
         }
-
+        String basicProfileImage = "https://test-bucket-jaewon.s3.ap-northeast-2.amazonaws.com/images/1c336d55-b902-4862-83b1-02c8465d55bc%EA%B8%B0%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80.jpg";
         Member member = new Member(requestDto.getEmail(), requestDto.getNickname(),
-            passwordEncoder.encode(requestDto.getPassword()));
+            passwordEncoder.encode(requestDto.getPassword()),basicProfileImage);
 
         memberRepository.save(member);
-        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), requestDto.getEmail(), member.getNickname());
+        Member tokenMember = isPresentEmail(requestDto.getEmail());
+        TokenDto tokenDto = tokenProvider.generateTokenDto(tokenMember);
+        tokenToHeaders(tokenDto, response);
+        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), requestDto.getEmail(), member.getNickname(),member.getCreatedAt(),member.getModifiedAt());
 
         return new ResponseDto<>(memberResponseDto);
     }
@@ -86,7 +89,7 @@ public class MemberService {
         TokenDto tokenDto = tokenProvider.generateTokenDto(member);
         tokenToHeaders(tokenDto, response);
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), requestDto.getEmail(), member.getNickname());
+        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), requestDto.getEmail(), member.getNickname(),member.getCreatedAt(),member.getModifiedAt());
 
         return new ResponseDto<>(memberResponseDto);
     }
