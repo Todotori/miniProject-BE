@@ -1,3 +1,16 @@
+
+POST http://localhost:8080/api/member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM0NCIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTY2MjUxNjc4MX0.hbjscob8LByOtVY77O-dOirO_fnxh98I6prl52faHTg
+
+{
+  "company" : "test311",
+  "comment" : "test3 content3",
+  "profileImage" : "tag4"
+}
+
+###
+
 POST http://3.34.90.63/api/emailcheck
 Content-Type: application/json
 
@@ -16,14 +29,48 @@ Content-Type: application/json
 
 ###
 
-POST http://3.34.90.63/api/signup
+POST http://localhost:8080/api/signup
 Content-Type: application/json
 
 {
-  "email" : "qwe123",
-  "nickname" : "qwe123",
-  "password" : "1234",
-  "passwordConfirm":"1234"
+  "email" : "qwe123445",
+  "nickname" : "qwe123445",
+  "password" : "123455",
+  "passwordConfirm":"123455"
+}
+
+###
+
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email" : "qwe12344",
+  "password" : "123455"
+}
+
+###
+
+POST http://localhost:8080/api/todo
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM0NCIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTY2MjUxNjA2MX0.dbBYlcE4DZbOnp-lJjSUJQI6zdziDrd_4sA27BWveCQ
+
+{
+"title" : "test3",
+"content" : "test3 content3",
+"tag" : "tag4"
+}
+
+###
+
+POST http://localhost:8080/api/member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM1NSIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTY2MjUxMDI0OX0.5Asq-xIjfz-1ayAOw4nQ4T6936wFr1Jopep0_rME5j8
+
+{
+"company" : "test311",
+"comment" : "test3 content3"
+
 }
 
 ###
@@ -32,16 +79,54 @@ POST http://3.34.90.63/api/login
 Content-Type: application/json
 
 {
-  "email":"qwe123",
-  "password":"1234"
+  "email" : "qwe12355",
+  "password" : "123455"
 }
 
 ###
 
 GET http://3.34.90.63/api/todo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjMiLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE2NjI0MzIzODF9.DHa8Tx-Tqhr87mQ0nCPBTdl-eKOGZ6Jf-1yEOom_rcQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM1NSIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTY2MjUxNTIyMn0.A1BQ2T-Ey86fc7IqdvDukBf8nBvlXh3sZo9twu3Kky4
 #Refresh-Token: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjMwMzM1ODF9.ctIJ4Xl0mxlkGUrCXPLNUQ-DvFHEgbpzSftl_7TPS5E
 
 Accept: application/json
+
+###
+
+GET http://3.34.90.63/api/todo/done
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjMiLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE2NjI0NDA0NTN9.z0v5EH_Ab2tRZcX8ctriRPrqtxtBt-w3NAPD2kZHZHQ
+
+###
+
+POST http://3.34.90.63/api/todo
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM1NSIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTY2MjUxNTIyMn0.A1BQ2T-Ey86fc7IqdvDukBf8nBvlXh3sZo9twu3Kky4
+
+{
+    "title" : "test3",
+    "content" : "test3 content3",
+    "tag" : "tag4"
+}
+
+###
+
+GET http://localhost:8080/api/member
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjMiLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE2NjI0NDE4MjB9.O6R5uEWL1Hsh_634UpzxHooIjwL7ZxUuvdfu_QipsBw
+
+###
+
+
+PUT http://localhost:8080/api/todo/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjMiLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE2NjI0NTUxNjl9.Am28U9YU4zgO9eVziOkm1otgMg1aW2gYclZDx3chvkk
+
+
+{
+  "title" : "test3",
+  "content" : "test3 content3",
+  "tag" : "tag4"
+}
 
 ###
