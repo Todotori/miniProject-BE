@@ -4,10 +4,16 @@ import com.sparta.miniprojectbe.domain.dto.request.CheckRequestDto;
 import com.sparta.miniprojectbe.domain.dto.request.LoginRequestDto;
 import com.sparta.miniprojectbe.domain.dto.request.MemberRequestDto;
 import com.sparta.miniprojectbe.domain.dto.response.ResponseDto;
+import com.sparta.miniprojectbe.domain.entity.Member;
+import com.sparta.miniprojectbe.security.UserDetailsImpl;
 import com.sparta.miniprojectbe.service.MemberService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
@@ -18,8 +24,8 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/api/signup")
-    public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto) {
-        return memberService.createMember(requestDto);
+    public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto, HttpServletResponse response) {
+        return memberService.createMember(requestDto, response);
     }
 
     // 로그인
@@ -30,14 +36,15 @@ public class MemberController {
 
     // 이메일 중복확인
     @PostMapping("/api/emailcheck")
-    public boolean emailcheck(@RequestBody CheckRequestDto requestDto) {
+    public boolean emailCheck(@RequestBody CheckRequestDto requestDto) {
         return memberService.emailCheck(requestDto);
     }
 
     // 닉네임 중복확인
     @PostMapping("/api/nickcheck")
-    public boolean nickcheck(@RequestBody CheckRequestDto requestDto) {
+    public boolean nickCheck(@RequestBody CheckRequestDto requestDto) {
         return memberService.nickCheck(requestDto);
     }
+
 
 }

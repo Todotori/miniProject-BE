@@ -64,7 +64,7 @@ public class ToDoServiceImpl implements ToDoService {
     toDo.update(toDoUpdateRequestDto);
 
     toDo = toDoRepository.save(toDo);
-
+    System.out.println(toDo);
     return new ToDoResponseDto(toDo);
   }
 
