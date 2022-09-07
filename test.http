@@ -33,8 +33,8 @@ POST http://localhost:8080/api/signup
 Content-Type: application/json
 
 {
-  "email" : "asdf3@naver.com",
-  "nickname" : "wer재원2",
+  "email" : "asdf3@naveerr.com",
+  "nickname" : "wer재원32",
   "password" : "23444",
   "passwordConfirm":"23444"
 }
@@ -45,8 +45,8 @@ POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-  "email" : "qwe12344",
-  "password" : "123455"
+  "email" : "asdf3@naver.com",
+  "password" : "23444"
 }
 
 ###
@@ -72,6 +72,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2UxMjM1NSIsImF1dGgiOiJST
 "comment" : "test3 content3"
 
 }
+
+###
+
+GET http://localhost:8080/api/member
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZXLsnqzsm5AyIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNjYyNTQ0Mzg5fQ.hn3w9GJOjG_2F6H5jhfLujjPs9An7YlQ1-be17LDGtk
+
+Accept: application/json
 
 ###
 
