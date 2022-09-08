@@ -12,6 +12,7 @@ public enum ErrorCode {
   BAD_TOKEN_REQUEST("BAD_TOKEN_REQUEST", "토큰이 유효하지 않습니다."),
 
   TOKEN_NOT_FOUND("TOKEN_NOT_FOUND", "존재하지 않는 Token 입니다."),
+  NOT_SAME_PASSWORD("NOT_SAME_PASSWORD","비밀번호가 일치하지 않습니다."),
 
   DUPLICATED_EMAIL("DUPLICATED_EMAIL", "중복된 이메일 입니다."),
 

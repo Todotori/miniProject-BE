@@ -83,7 +83,7 @@ public class MemberService {
         }
 
         if (!member.validatePassword(passwordEncoder, requestDto.getPassword())) {
-            return  new ResponseDto<>(null,ErrorCode.MEMBER_NOT_FOUND );
+            return  new ResponseDto<>(null,ErrorCode.NOT_SAME_PASSWORD );
         }
 
         TokenDto tokenDto = tokenProvider.generateTokenDto(member);
