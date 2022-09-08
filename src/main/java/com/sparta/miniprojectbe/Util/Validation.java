@@ -17,7 +17,9 @@ public class Validation {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(errors);
+        return ResponseEntity.status(200).body(errors);
+        // 에러코드 반환
+        // ResponseEntity.badRequest().body(errors);
     }
 
 }
