@@ -10,6 +10,7 @@ import com.sparta.miniprojectbe.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +26,7 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/api/signup")
-    public ResponseDto<?> signup(@Valid @RequestBody MemberRequestDto requestDto, HttpServletResponse response) {
+    public ResponseDto<?> signup(@Validated @RequestBody MemberRequestDto requestDto, HttpServletResponse response) {
         return memberService.createMember(requestDto, response);
     }
 
@@ -37,13 +38,13 @@ public class MemberController {
 
     // 이메일 중복확인
     @PostMapping("/api/emailcheck")
-    public boolean emailCheck(@RequestBody CheckRequestDto requestDto) {
+    public boolean emailCheck(@Validated @RequestBody CheckRequestDto requestDto) {
         return memberService.emailCheck(requestDto);
     }
 
     // 닉네임 중복확인
     @PostMapping("/api/nickcheck")
-    public boolean nickCheck(@RequestBody CheckRequestDto requestDto) {
+    public boolean nickCheck(@Validated @RequestBody CheckRequestDto requestDto) {
         return memberService.nickCheck(requestDto);
     }
 
